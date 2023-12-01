@@ -149,3 +149,84 @@ POP
 
 
 LIFO = 'Last In - First Out'
+
+
+## -- -- -- -- QUEUE RIT METHOD -- -- -- -- ##
+class CircularQueue:
+    def __init__(self, size):
+        self.__tail = -1  # Rear of Queue
+        self.__front = -1  # Front of Queue
+        # if size = 5 -> [None, None, None, None, None]
+        self.__queue = [None] * size
+        self.__size = size
+
+    def isEmpty(self):
+        return self.__front == -1
+
+    def isFull(self):
+        return (self.__tail + 1) % self.__size == self.__front
+
+    def getQueue(self):
+        return self.__queue
+
+    def enQueue(self, data):  # Add data to queue
+        if self.isFull():
+            print("Queue full")
+            return
+
+        if self.isEmpty():
+            self.__front = self.__tail = 0
+        else:
+            self.__tail = (self.__tail + 1) % self.__size
+
+        self.__queue[self.__tail] = data
+
+    def deQueue(self):  # Remove data from queue
+        if self.isEmpty():
+            print("Queue empty")
+            return None
+
+        if self.__front == self.__tail:
+            self.__front = -1
+            self.__queue[self.__front] = None
+
+        else:
+            self.__queue[self.__front] = None
+            self.__front = (self.__front + 1) % self.__size
+
+        return self.__queue
+
+
+FIFO = 'FIRST IN FIRST OUT'
+"""
+[None, None, None, None, None]
+[0, 1, 2, 3, 4]
+[None, 1, 2, 3, 4]
+[None, None, 2, 3, 4]
+[None, None, None, 3, 4]
+[None, None, None, None, 4]
+[None, None, None, None, None]
+"""
+
+
+capacity = 5
+my_circular_queue = CircularQueue(capacity)
+
+my_circular_queue.enQueue(1)
+my_circular_queue.enQueue(2)
+my_circular_queue.enQueue(3)
+print("Circular queue", my_circular_queue.getQueue())
+
+# print("Size of the queue:", my_circular_queue.size())
+
+print("Dequeue:", my_circular_queue.deQueue())
+print("Dequeue:", my_circular_queue.deQueue())
+
+my_circular_queue.enQueue(4)
+my_circular_queue.enQueue(5)
+print("Circular queue", my_circular_queue.getQueue())
+
+
+print("Dequeue:", my_circular_queue.deQueue())
+print("Dequeue:", my_circular_queue.deQueue())
+print("Dequeue:", my_circular_queue.deQueue())
