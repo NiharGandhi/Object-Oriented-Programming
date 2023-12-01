@@ -88,7 +88,7 @@ c1.__brand = "Cadillac"
 class Node:
     __slots__ = ["__data" "__next"]
 
-    def init(self, data):
+    def __init__(self, data):
         self.__data = data
         self.__next = None
 
