@@ -1,9 +1,10 @@
 class Student:
-    __slots__ = ["__first_name", "__last_name"]
-    def __init__(self, f_name, l_name):
-        self.__first_name = f_name # first_name is instance variable
+    __slots__ = ["__first_name", "__last_name"] #SLOTS -> FOR PRE-DEFINING THE VARIABLES
+    def __init__(self, f_name, l_name): #Initializes the Class Object
+        self.__first_name = f_name # first_name is instance variable >>> Encapsulation (Private)
         self.__last_name = l_name   # Encapsulation
 
+    # BY DEFAULT MAKE GET AND SET FUNCTIONS
     ## accessor or getter
     def get_first_name(self):
         return self.__first_name
@@ -22,39 +23,43 @@ class Student:
     def __str__(self):
         return "My Name is " + self.__first_name + " and Family name is " + self.__last_name
     
-    ## Represnts
+    ## Represents
     def __repr__(self):
         return str(self.__class__) + "( " + self.get_first_name() + " " + self.get_last_name() + " )"
     
-    ## checks if objects are equal
+    ## checks if objects are equal (call this by just doing st1==st2)
     def __eq__(self, otherStudent): 
         # return type(self) == type(otherStudent) and (self.__last_name == otherStudent.__last_name)
         return isinstance(otherStudent, self.__class__) and (self.get_last_name() == otherStudent.get_last_name()) and (self.get_first_name() == otherStudent.get_first_name())
     
-    ## check if not equal
+    ## check if not equal (call this by doing st1 != st2)
     def __ne__(self, otherStudent):
         return not self.__eq__(otherStudent)
     
-    ## OPtimising eqality check
+    ## Optimising eqality check
     def __hash__(self):
-        return hash(self.get_first_name())
+        return hash(self.get_last_name())
     
-    def __it__(self, otherStudent):
-        return self.get_first_name() < otherStudent.get_first_name()
+    def __lt__(self, otherStudent):
+        return (self.get_first_name() < otherStudent.get_first_name())
     
-    def __go__(self, otherStudent):
+    def __ge__(self, otherStudent):
         return self.get_first_name() >= otherStudent.get_first_name()
+    
+    def __gt__(self, otherStudent):
+        return self.get_first_name() > otherStudent.get_first_name()
+    
+    def __le__(self, otherStudent):
+        return self.get_first_name() <= otherStudent.get_first_name()
 
 
 st1 = Student("Nihar", "Gandhi") # Constructor
-# st2 = Student("Nihar", "Gandhi")
-# st3 = st1
+st2 = Student("Ashitha", "Gandhi")
 
 # print(st1)
-# st1.__first_name = "Gandhi"
 
-
-# print(repr(st1))
+print(st1)
+print(st1 <= st2)
 
 # print(st1.get_first_name(), st1.get_last_name())
 # st1.set_first_name('Faiz')
@@ -80,7 +85,6 @@ class Car:
     
 
 c1 = Car("Ford", "Black") # Constructor c1 -> object -> type Car
-c1.__brand = "Cadillac"
 
 
 
@@ -215,18 +219,18 @@ my_circular_queue = CircularQueue(capacity)
 my_circular_queue.enQueue(1)
 my_circular_queue.enQueue(2)
 my_circular_queue.enQueue(3)
-print("Circular queue", my_circular_queue.getQueue())
+# print("Circular queue", my_circular_queue.getQueue())
 
 # print("Size of the queue:", my_circular_queue.size())
 
-print("Dequeue:", my_circular_queue.deQueue())
-print("Dequeue:", my_circular_queue.deQueue())
+# print("Dequeue:", my_circular_queue.deQueue())
+# print("Dequeue:", my_circular_queue.deQueue())
 
 my_circular_queue.enQueue(4)
 my_circular_queue.enQueue(5)
-print("Circular queue", my_circular_queue.getQueue())
+# print("Circular queue", my_circular_queue.getQueue())
 
 
-print("Dequeue:", my_circular_queue.deQueue())
-print("Dequeue:", my_circular_queue.deQueue())
-print("Dequeue:", my_circular_queue.deQueue())
+# print("Dequeue:", my_circular_queue.deQueue())
+# print("Dequeue:", my_circular_queue.deQueue())
+# print("Dequeue:", my_circular_queue.deQueue())
