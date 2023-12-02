@@ -89,6 +89,9 @@ c1 = Car("Ford", "Black") # Constructor c1 -> object -> type Car
 
 
 ## EXAMPLE 3
+"""
+Linked List
+"""
 class Node:
     __slots__ = ["__data" "__next"]
 
@@ -122,22 +125,22 @@ class Stack:
         if self.__head is None:
             self.__head = new_node
         else:
-            new_node.__next = self.__head
-            self.__head = new_node
+            new_node.__next = self.__head  # None -> Head
+            self.__head = new_node # Head -> Data
         self.__size += 1
 
     def pop(self):
         if self.__size == 0:
             return None
         else:
-            data = self.__head.data
-            self.__head = self.__head.__next
+            data = self.__head.data 
+            self.__head = self.__head.__next # Gives me None (__next)
             self.__size -= 1
             return data
 
 """
 PUSH
-1. Node(1) >>> [1]
+1. Node(1): [None] >>> [1]
 2. [None] or [data]
 3. [None] >>> [[1]] >>> [1] -> head
 4. [data] >>> [[1], [head(None)]] -> [[1], [2]]
@@ -149,6 +152,17 @@ POP
 3. data -> last element [[1], [2]] >>> data = [2]
 4. head (2) >>> head.__next -> [None] ==> [2] -> [None]
 5. size = size - 1
+
+Node(1)
+data = 1
+next = None
+stack: [[1], None]
+Node(2)
+data = 2
+next = None
+stack = [[1], [2], None]
+
+OG stack = [None]
 """
 
 
@@ -190,9 +204,10 @@ class CircularQueue:
             print("Queue empty")
             return None
 
-        if self.__front == self.__tail:
-            self.__front = -1
+        if self.__front == self.__tail: # 1 element
             self.__queue[self.__front] = None
+            self.__front = self.__tail = -1
+            
 
         else:
             self.__queue[self.__front] = None
@@ -204,6 +219,23 @@ class CircularQueue:
 FIFO = 'FIRST IN FIRST OUT'
 """
 [None, None, None, None, None]
+-1 - Front & Back
+
+l = [0]
+l[0] start and end
+[0, None, None, None, None]
+front - 0, tail - 0
+(0 + 1) % 5 -> 1 (index) 
+[0, 1, None, None, None]
+front - 0, tail - 1
+(1 + 1) % 5 -> 2 (index)
+[0, 1, 2, None, None]
+.
+.
+.
+[0, 1, 2, 3, 4]
+front - 0, tail - 4
+
 [0, 1, 2, 3, 4]
 [None, 1, 2, 3, 4]
 [None, None, 2, 3, 4]
