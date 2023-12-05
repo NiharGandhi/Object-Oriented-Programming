@@ -21,7 +21,7 @@ class Student:
     
     ## Prints
     def __str__(self):
-        return "My Name is " + self.__first_name + " and Family name is " + self.__last_name
+        return "My Name is " + self.get_first_name() + " and Family name is " + self.get_last_name()
     
     ## Represents
     def __repr__(self):
@@ -53,13 +53,13 @@ class Student:
         return self.get_first_name() <= otherStudent.get_first_name()
 
 
-st1 = Student("Nihar", "Gandhi") # Constructor
+st1 = Student("Nihar", "Gandhi") # Constructor -> st1 is object, whose type is Student (class type)
 st2 = Student("Ashitha", "Gandhi")
 
 # print(st1)
 
 print(st1)
-print(st1 <= st2)
+print(st1 < st2)
 
 # print(st1.get_first_name(), st1.get_last_name())
 # st1.set_first_name('Faiz')
@@ -116,6 +116,7 @@ class Node:
 
 
 class Stack:
+    __slots__ = ['__head', '__size']
     def __init__(self): # Initialization
         self.__head = None # Last element or position of STACK
         self.__size = 0 # SIZE of STACK (0 means empty)
@@ -133,14 +134,15 @@ class Stack:
         if self.__size == 0:
             return None
         else:
-            data = self.__head.data 
+            data = self.__head.data
             self.__head = self.__head.__next # Gives me None (__next)
             self.__size -= 1
             return data
 
 """
+stack = []
 PUSH
-1. Node(1): [None] >>> [1]
+1. Node(1): [None] >>> [1, 2]
 2. [None] or [data]
 3. [None] >>> [[1]] >>> [1] -> head
 4. [data] >>> [[1], [head(None)]] -> [[1], [2]]
@@ -193,9 +195,9 @@ class CircularQueue:
             return
 
         if self.isEmpty():
-            self.__front = self.__tail = 0
+            self.__front = self.__tail = 0 # INDEX
         else:
-            self.__tail = (self.__tail + 1) % self.__size
+            self.__tail = (self.__tail + 1) % self.__size # INDEX
 
         self.__queue[self.__tail] = data
 
@@ -235,6 +237,7 @@ front - 0, tail - 1
 .
 [0, 1, 2, 3, 4]
 front - 0, tail - 4
+tail == front
 
 [0, 1, 2, 3, 4]
 [None, 1, 2, 3, 4]
@@ -245,21 +248,19 @@ front - 0, tail - 4
 """
 
 
-capacity = 5
-my_circular_queue = CircularQueue(capacity)
+# capacity = 5
+# my_circular_queue = CircularQueue(capacity)
 
-my_circular_queue.enQueue(1)
-my_circular_queue.enQueue(2)
-my_circular_queue.enQueue(3)
+# my_circular_queue.enQueue(1)
+# my_circular_queue.enQueue(2)
+# my_circular_queue.enQueue(3)
 # print("Circular queue", my_circular_queue.getQueue())
 
-# print("Size of the queue:", my_circular_queue.size())
-
 # print("Dequeue:", my_circular_queue.deQueue())
 # print("Dequeue:", my_circular_queue.deQueue())
 
-my_circular_queue.enQueue(4)
-my_circular_queue.enQueue(5)
+# my_circular_queue.enQueue(4)
+# my_circular_queue.enQueue(5)
 # print("Circular queue", my_circular_queue.getQueue())
 
 
